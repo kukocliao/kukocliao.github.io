@@ -206,6 +206,11 @@
         </section>
     </main>
 
+    <!-- 頁底版權聲明 -->
+    <footer class="shrink-0 text-center text-xs text-slate-400 py-2 px-4 border-t border-slate-200/60 bg-white/50">
+        本網站圖片僅供個人教育用途，非商業使用，版權歸各原作者所有。部分圖片來自 Wikimedia Commons（CC 授權），其餘圖片已標示來源。
+    </footer>
+
     <!-- 自定義對話框 (Modal) -->
     <div id="custom-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-200">
         <div class="bg-white rounded-3xl p-5 md:p-8 max-w-sm md:max-w-md w-full mx-4 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-200">
@@ -323,6 +328,43 @@
             "黑糖糕":       "https://upload.wikimedia.org/wikipedia/commons/2/2d/%E9%BB%91%E7%B3%96%E7%B3%95.jpg",
             "貢糖":         "https://shoplineimg.com/541bc1741a08e06d9b000003/678dc913dfc3fc000e24705f/3860x.webp?source_format=jpg",
             "大麴酒":       "https://upload.wikimedia.org/wikipedia/commons/3/30/2012-06-05_Liquor_products_by_the_Kinmen_Distillery.jpg",
+        };
+
+        // 圖片出處（非商業使用，版權歸原作者）
+        const sourceDb = {
+            "鎖管":         "海鮮王水產",
+            "包種茶":       "Wikimedia Commons (CC)",
+            "地瓜":         "May Workshops",
+            "陶瓷":         "Wikimedia Commons (CC)",
+            "豆干":         "Wikimedia Commons (CC)",
+            "米粉":         "Wikimedia Commons (CC)",
+            "米粉製作體驗": "Wikimedia Commons (CC)",
+            "包裝銷售":     "Wikimedia Commons (CC)",
+            "草莓":         "Wikimedia Commons (CC)",
+            "三義木雕藝術節":"浪漫台三線官網",
+            "太陽餅":       "I.F. House",
+            "十大伴手禮活動":"台灣好新聞",
+            "葡萄":         "Wikimedia Commons (CC)",
+            "世界茶業博覽會":"Wikimedia Commons (CC)",
+            "手工紙":       "自由時報",
+            "梅子":         "Wikimedia Commons (CC)",
+            "醬油":         "自由時報",
+            "牡蠣":         "Wikimedia Commons (CC)",
+            "虱目魚":       "Wikimedia Commons (CC)",
+            "鳳梨":         "Wikimedia Commons (CC)",
+            "芒果乾":       "Wikimedia Commons (CC)",
+            "玉荷包荔枝":   "三多利農業",
+            "油紙傘":       "Wikimedia Commons (CC)",
+            "蓮霧":         "Wikimedia Commons (CC)",
+            "皮雕":         "就是旅行",
+            "三星蔥":       "網路商城",
+            "西瓜":         "Wikimedia Commons (CC)",
+            "釋迦":         "Wikimedia Commons (CC)",
+            "柴魚片":       "BuzzDaily",
+            "宣傳銷售":     "Wikimedia Commons (CC)",
+            "黑糖糕":       "Wikimedia Commons (CC)",
+            "貢糖":         "網路商城",
+            "大麴酒":       "Wikimedia Commons (CC)",
         };
 
         // --- 全域狀態 ---
@@ -533,7 +575,8 @@
                 const div = document.createElement('div');
                 div.className = "bg-emerald-50/80 border-2 border-emerald-100 rounded-2xl overflow-hidden shadow-sm";
                 const imgUrl = imageDb[item.name];
-                const imgHtml = imgUrl ? `<img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'" onclick="lbOpen(this)" class="w-full h-36 md:h-48 object-contain bg-slate-50 cursor-zoom-in">` : '';
+                const imgSrc = sourceDb[item.name];
+                const imgHtml = imgUrl ? `<div><img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.parentElement.style.display='none'" onclick="lbOpen(this)" class="w-full h-36 md:h-48 object-contain bg-slate-50 cursor-zoom-in">${imgSrc ? `<div class="text-right text-xs text-slate-400 px-2 py-0.5 bg-slate-50 border-t border-slate-100">圖片來源：${imgSrc}</div>` : ''}</div>` : '';
                 div.innerHTML = `
                     ${imgHtml}
                     <div class="p-4 md:p-6">
