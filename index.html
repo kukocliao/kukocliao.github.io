@@ -3,92 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>廖書毅 職能治療師 | Liao Shu-Yi - Personal Profile</title>
+    <title>無心插柳柳橙汁 | 職能治療師</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        * { font-family: 'Nunito', 'Noto Sans TC', sans-serif; }
-        body { background: linear-gradient(135deg, #fef3f2 0%, #f0f9ff 100%); }
-        .clay {
-            background: linear-gradient(145deg, #ffffff, #e6e6e6);
-            border-radius: 20px;
+        * { font-family: 'Outfit', 'Noto Sans TC', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #fefcfb 0%, #f0fbf7 100%);
+            color: #2c2a29;
+            overflow-x: hidden;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        .clay-card {
+            background: linear-gradient(145deg, #ffffff, #f0faf5);
+            border-radius: 2rem;
             border: 3px solid rgba(255,255,255,0.8);
             box-shadow:
-                8px 8px 0 rgba(0,0,0,0.08),
-                inset -2px -2px 4px rgba(0,0,0,0.05),
+                12px 12px 0 rgba(0,0,0,0.02),
+                inset -2px -2px 4px rgba(0,0,0,0.01),
                 inset 2px 2px 4px rgba(255,255,255,0.8);
         }
-        .clay-pink {
-            background: linear-gradient(145deg, #FDBCB4, #f5a69c);
-            border: 3px solid rgba(255,255,255,0.5);
-            box-shadow:
-                8px 8px 0 rgba(253,188,180,0.5),
-                inset -2px -2px 4px rgba(0,0,0,0.1),
-                inset 2px 2px 4px rgba(255,255,255,0.6);
-        }
-        .clay-blue {
-            background: linear-gradient(145deg, #ADD8E6, #9bc5d9);
-            border: 3px solid rgba(255,255,255,0.5);
-            box-shadow:
-                8px 8px 0 rgba(173,216,230,0.5),
-                inset -2px -2px 4px rgba(0,0,0,0.1),
-                inset 2px 2px 4px rgba(255,255,255,0.6);
-        }
-        .clay-mint {
-            background: linear-gradient(145deg, #98FF98, #88ef88);
-            border: 3px solid rgba(255,255,255,0.5);
-            box-shadow:
-                8px 8px 0 rgba(152,255,152,0.5),
-                inset -2px -2px 4px rgba(0,0,0,0.1),
-                inset 2px 2px 4px rgba(255,255,255,0.6);
-        }
-        .clay-lilac {
-            background: linear-gradient(145deg, #E6E6FA, #d6d6ea);
-            border: 3px solid rgba(255,255,255,0.5);
-            box-shadow:
-                8px 8px 0 rgba(230,230,250,0.5),
-                inset -2px -2px 4px rgba(0,0,0,0.1),
-                inset 2px 2px 4px rgba(255,255,255,0.6);
-        }
         .clay-btn {
-            transition: all 0.2s ease-out;
+            background: linear-gradient(145deg, #a7d7c5, #8dbfae);
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow:
+                6px 6px 0 rgba(141,191,174,0.3),
+                inset -2px -2px 4px rgba(0,0,0,0.05),
+                inset 2px 2px 4px rgba(255,255,255,0.5);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .clay-btn:hover {
             transform: translateY(-2px);
-            box-shadow:
-                10px 10px 0 rgba(0,0,0,0.08),
-                inset -2px -2px 4px rgba(0,0,0,0.05),
-                inset 2px 2px 4px rgba(255,255,255,0.8);
+            box-shadow: 8px 8px 0 rgba(141,191,174,0.4);
         }
         .clay-btn:active {
-            transform: translateY(2px);
-            box-shadow:
-                4px 4px 0 rgba(0,0,0,0.08),
-                inset -2px -2px 4px rgba(0,0,0,0.05),
-                inset 2px 2px 4px rgba(255,255,255,0.8);
+            transform: translateY(1px);
+            box-shadow: 4px 4px 0 rgba(141,191,174,0.4);
+        }
+        .icon-badge {
+            background: linear-gradient(145deg, #ffffff, #f0faf5);
+            border-radius: 1.25rem;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.03), inset 2px 2px 4px rgba(255,255,255,0.8);
         }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed top-4 left-4 right-4 clay z-50">
+    <nav class="fixed top-4 left-4 right-4 clay-card z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="font-bold text-gray-800">廖書毅 職能治療師</span>
-            <div class="flex gap-4">
-                <a href="#about" class="text-gray-600 hover:text-gray-900 font-semibold text-sm">關於我</a>
-                <a href="#specialty" class="text-gray-600 hover:text-gray-900 font-semibold text-sm">專業領域</a>
-                <a href="#contact" class="text-gray-600 hover:text-gray-900 font-semibold text-sm">聯絡合作</a>
+            <span class="font-black text-neutral-800 text-lg md:text-xl">無心插柳柳橙汁</span>
+            <div class="flex items-center gap-4 md:gap-6">
+                <a href="#about" class="text-zinc-600 hover:text-emerald-700 font-bold text-sm md:text-base transition-colors">關於我</a>
+                <a href="#specialty" class="text-zinc-600 hover:text-emerald-700 font-bold text-sm md:text-base transition-colors">專業領域</a>
+                <a href="#podcast" class="text-zinc-600 hover:text-emerald-700 font-bold text-sm md:text-base transition-colors">Podcast</a>
+                <a href="#contact" class="text-zinc-600 hover:text-emerald-700 font-bold text-sm md:text-base transition-colors">聯絡合作</a>
+                <a href="https://www.instagram.com/ot_supportyou/" target="_blank" class="text-emerald-700 hover:text-emerald-800 font-black text-sm md:text-base flex items-center gap-1">
+                    📸 IG
+                </a>
+                <a href="https://www.threads.net/@ot_supportyou" target="_blank" class="text-neutral-700 hover:text-neutral-900 font-black text-sm md:text-base flex items-center gap-1">
+                    💬 Threads
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero / About -->
-    <section id="about" class="pt-32 pb-16 px-6">
+    <section id="about" class="pt-36 pb-16 px-6">
         <div class="max-w-4xl mx-auto text-center">
-            <div class="clay-pink rounded-3xl p-8 md:p-12 inline-block text-left">
-                <h1 class="text-3xl md:text-5xl font-black text-gray-800 mb-4 text-center">廖書毅 職能治療師</h1>
-                <p class="text-gray-600 text-center font-bold mb-6 tracking-wide">Liao Shu-Yi | Occupational Therapist</p>
-                <div class="clay bg-white/80 p-6 md:p-8 rounded-2xl text-gray-700 text-base md:text-lg leading-relaxed shadow-sm">
+            <div class="clay-card p-8 md:p-12 inline-block text-left">
+                <!-- Avatar Container -->
+                <div class="flex justify-center mb-8">
+                    <div class="w-48 h-48 md:w-56 md:h-56 clay-card rounded-full overflow-hidden animate-float transition-all duration-300 hover:scale-105 hover:rotate-3 cursor-pointer">
+                        <img src="podcast.png" alt="無心插柳柳橙汁" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <span class="bg-emerald-100 text-emerald-800 text-xs uppercase tracking-widest font-bold px-3 py-1 rounded-full inline-block mb-4 mx-auto block w-fit">Occupational Therapist</span>
+                <h1 class="text-4xl md:text-6xl font-black text-neutral-800 mb-3 text-center">無心插柳柳橙汁</h1>
+                <p class="text-zinc-500 text-center text-base md:text-lg font-semibold mb-8 tracking-wide">職能治療師・Podcast《別人爸爸比較好》主持人</p>
+                <div class="bg-white/70 p-6 md:p-10 rounded-2xl text-zinc-700 text-base md:text-xl leading-relaxed border border-white">
                     深耕於臨床職能治療領域，在早期療育、學校系統、長期照護等領域，致力於融合「環境支持」與「活動分析」的核心精神。透過跨領域的視野，將數位科技與自動化思維導入臨床工作，不僅提升醫療服務的流暢度，更持續研發適合在地化發展的創新教材與互動式健康推廣方案。
                 </div>
             </div>
@@ -98,42 +96,42 @@
     <!-- Specialty Cards Grid -->
     <section id="specialty" class="py-12 px-6">
         <div class="max-w-5xl mx-auto">
-            <h3 class="text-gray-500 text-sm uppercase tracking-widest mb-8 text-center font-bold">專業核心與實踐</h3>
+            <h3 class="text-emerald-700 text-xs md:text-sm uppercase tracking-widest mb-8 text-center font-bold">專業核心與實踐</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="clay-blue rounded-3xl p-6 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between">
+                <div class="clay-card p-8 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between bg-white/60">
                     <div>
-                        <div class="w-16 h-16 clay rounded-2xl flex items-center justify-center mb-4 mx-auto bg-white">
-                            <span class="text-3xl">🎨</span>
+                        <div class="w-20 h-20 icon-badge flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">🎨</span>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 text-center mb-3">臨床實務與環境支持</h4>
-                        <p class="text-gray-700 text-sm leading-relaxed text-center">
+                        <h4 class="text-2xl font-bold text-neutral-800 text-center mb-4">臨床實務與環境支持</h4>
+                        <p class="text-zinc-600 text-base md:text-lg leading-relaxed text-center">
                             深耕早期療育、學校系統與長照領域。融合環境支持與精密活動分析，為個案量身打造最適切的生活介入。
                         </p>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div class="clay-mint rounded-3xl p-6 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between">
+                <div class="clay-card p-8 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between bg-white/60">
                     <div>
-                        <div class="w-16 h-16 clay rounded-2xl flex items-center justify-center mb-4 mx-auto bg-white">
-                            <span class="text-3xl">💻</span>
+                        <div class="w-20 h-20 icon-badge flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">💻</span>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 text-center mb-3">數位科技與自動化</h4>
-                        <p class="text-gray-700 text-sm leading-relaxed text-center">
+                        <h4 class="text-2xl font-bold text-neutral-800 text-center mb-4">數位科技與自動化</h4>
+                        <p class="text-zinc-600 text-base md:text-lg leading-relaxed text-center">
                             具備跨領域數位思維，主動將自動化工具與科技導入臨床流程，極大化提升醫療服務品質與行政流暢度。
                         </p>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div class="clay-lilac rounded-3xl p-6 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between">
+                <div class="clay-card p-8 cursor-pointer hover:translate-y-[-4px] transition-transform flex flex-col justify-between bg-white/60">
                     <div>
-                        <div class="w-16 h-16 clay rounded-2xl flex items-center justify-center mb-4 mx-auto bg-white">
-                            <span class="text-3xl">🧸</span>
+                        <div class="w-20 h-20 icon-badge flex items-center justify-center mb-6 mx-auto">
+                            <span class="text-4xl">🧸</span>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800 text-center mb-3">創新教材研發</h4>
-                        <p class="text-gray-700 text-sm leading-relaxed text-center">
+                        <h4 class="text-2xl font-bold text-neutral-800 text-center mb-4">創新教材研發</h4>
+                        <p class="text-zinc-600 text-base md:text-lg leading-relaxed text-center">
                             專注於在地化教材研發，設計極具互動性的健康推廣方案，讓職能治療融入生活，更具親和力。
                         </p>
                     </div>
@@ -142,27 +140,101 @@
         </div>
     </section>
 
-    <!-- Contact Form -->
+    <!-- Podcast Section -->
+    <section id="podcast" class="py-12 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="text-emerald-700 text-xs md:text-sm uppercase tracking-widest mb-8 text-center font-bold">Podcast 節目推廣</h3>
+            <div class="clay-card p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 bg-white/60">
+                <!-- Cover Image -->
+                <div class="w-48 h-48 md:w-56 md:h-56 clay-card overflow-hidden flex-shrink-0 transition-transform duration-300 hover:scale-105 rounded-[1.5rem]">
+                    <img src="podcast.png" alt="別人爸爸比較好" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Details -->
+                <div class="flex-grow text-center md:text-left">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs uppercase tracking-widest font-bold px-3 py-1 rounded-full inline-block mb-4">Podcast 節目</span>
+                    <h4 class="text-3xl md:text-4xl font-black text-neutral-800 mb-4">《別人爸爸比較好》</h4>
+                    <p class="text-zinc-600 text-base md:text-lg leading-relaxed mb-8">
+                        無心插柳柳橙汁主理的 Podcast 節目。從職能治療的獨特視角出發，聊聊日常生活中的活動分析、家庭系統與育兒的點滴。無論是生活支持還是環境建立，讓我們一起探討怎麼陪孩子長大！
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <!-- CTA Button -->
+                        <a href="https://podcasts.apple.com/us/podcast/%E5%88%A5%E4%BA%BA%E7%88%B8%E7%88%B8%E6%AF%94%E8%BC%83%E5%A5%BD/id1805438155" target="_blank" class="clay-btn rounded-2xl px-8 py-4 font-bold text-emerald-950 cursor-pointer text-base inline-block text-center">
+                            🎧 立即在 Apple Podcasts 收聽
+                        </a>
+
+                        <!-- QR Code Container -->
+                        <div class="flex items-center gap-4 clay-card bg-white p-4">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://podcasts.apple.com/us/podcast/%E5%88%A5%E4%BA%BA%E7%88%B8%E7%88%B8%E6%AF%94%E8%BC%83%E5%A5%BD/id1805438155" alt="Podcast QR Code" class="w-20 h-20 object-contain">
+                            <div class="text-left">
+                                <p class="text-sm font-bold text-zinc-700">手機掃描</p>
+                                <p class="text-xs text-zinc-500">直達 Apple Podcast</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form & Social Section -->
     <section id="contact" class="py-12 px-6 mb-16">
-        <div class="max-w-md mx-auto">
-            <div class="clay rounded-3xl p-8">
-                <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">聯絡與合作洽談</h3>
-                <form class="space-y-4" onsubmit="event.preventDefault(); alert('感謝您的來信！這是一個展示表單，後續可為您串接後端收信服務。');">
-                    <input type="text" placeholder="您的姓名 / 機構名稱" class="w-full clay-lilac rounded-2xl px-6 py-4 font-semibold text-gray-700 placeholder-gray-500 border-none focus:outline-none" required>
-                    <input type="email" placeholder="電子郵件地址" class="w-full clay-blue rounded-2xl px-6 py-4 font-semibold text-gray-700 placeholder-gray-500 border-none focus:outline-none" required>
-                    <textarea placeholder="請輸入您想合作的事項或諮詢內容..." rows="4" class="w-full clay-pink rounded-2xl px-6 py-4 font-semibold text-gray-700 placeholder-gray-500 border-none focus:outline-none resize-none" required></textarea>
-                    <button type="submit" class="w-full clay-mint clay-btn rounded-2xl px-8 py-4 font-bold text-gray-800 cursor-pointer">
+        <div class="max-w-4xl mx-auto space-y-12">
+            <!-- Form Block -->
+            <div class="clay-card p-8 md:p-12 max-w-xl mx-auto bg-white/70">
+                <h3 class="text-3xl font-bold text-neutral-800 text-center mb-8">聯絡與合作洽談</h3>
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('感謝您的來信！這是一個展示表單，後續可為您串接後端收信服務。');">
+                    <input type="text" placeholder="您的姓名 / 機構名稱" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
+                    <input type="email" placeholder="電子郵件地址" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
+                    <textarea placeholder="請輸入您想合作的事項或諮詢內容..." rows="4" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300 resize-none" required></textarea>
+                    <button type="submit" class="w-full clay-btn rounded-2xl px-8 py-4 font-bold text-emerald-950 text-lg cursor-pointer">
                         送出聯絡資訊
                     </button>
                 </form>
+            </div>
+
+            <!-- Instagram & Threads Double QR Codes Card -->
+            <div class="clay-card p-8 md:p-12 text-center bg-white/60">
+                <div class="w-16 h-16 icon-badge flex items-center justify-center mb-4 mx-auto">
+                    <span class="text-3xl">📢</span>
+                </div>
+                <h4 class="text-2xl md:text-3xl font-black text-neutral-800 mb-2">追蹤社群獲取最新動態</h4>
+                <p class="text-base text-zinc-600 mb-8">@ot_supportyou | 分享早期療育、自動化臨床與健康生活資訊</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                    <!-- Instagram QR Block -->
+                    <div class="clay-card bg-white p-6 flex flex-col items-center gap-4">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.instagram.com/ot_supportyou/" alt="Instagram QR Code" class="w-28 h-28 object-contain">
+                        <div>
+                            <p class="font-bold text-neutral-800 text-lg">Instagram</p>
+                            <p class="text-xs text-zinc-500 mb-3">掃描追蹤日常圖文</p>
+                        </div>
+                        <a href="https://www.instagram.com/ot_supportyou/" target="_blank" class="clay-btn text-emerald-950 font-bold px-6 py-2.5 rounded-xl text-sm w-full text-center">
+                            📸 立即追蹤
+                        </a>
+                    </div>
+
+                    <!-- Threads QR Block -->
+                    <div class="clay-card bg-white p-6 flex flex-col items-center gap-4">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://www.threads.net/@ot_supportyou" alt="Threads QR Code" class="w-28 h-28 object-contain">
+                        <div>
+                            <p class="font-bold text-neutral-800 text-lg">Threads</p>
+                            <p class="text-xs text-zinc-500 mb-3">掃描追蹤觀點文字</p>
+                        </div>
+                        <a href="https://www.threads.net/@ot_supportyou" target="_blank" class="clay-btn text-emerald-950 font-bold px-6 py-2.5 rounded-xl text-sm w-full text-center">
+                            💬 立即追蹤
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-8 px-6">
-        <div class="max-w-5xl mx-auto clay rounded-2xl px-6 py-4 text-center">
-            <p class="text-gray-500 text-sm font-semibold">&copy; 2026 廖書毅 職能治療師. All Rights Reserved.</p>
+        <div class="max-w-5xl mx-auto clay-card px-6 py-4 text-center">
+            <p class="text-zinc-500 text-sm font-semibold">&copy; 2026 無心插柳柳橙汁. All Rights Reserved.</p>
         </div>
     </footer>
 </body>
