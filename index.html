@@ -184,14 +184,41 @@
             <!-- Form Block -->
             <div class="clay-card p-8 md:p-12 max-w-xl mx-auto bg-white/70">
                 <h3 class="text-3xl font-bold text-neutral-800 text-center mb-8">聯絡與合作洽談</h3>
-                <form class="space-y-6" onsubmit="event.preventDefault(); alert('感謝您的來信！這是一個展示表單，後續可為您串接後端收信服務。');">
-                    <input type="text" placeholder="您的姓名 / 機構名稱" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
-                    <input type="email" placeholder="電子郵件地址" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
-                    <textarea placeholder="請輸入您想合作的事項或諮詢內容..." rows="4" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300 resize-none" required></textarea>
-                    <button type="submit" class="w-full clay-btn rounded-2xl px-8 py-4 font-bold text-emerald-950 text-lg cursor-pointer">
+                <form id="contact-form" class="space-y-6">
+                    <input type="text" name="name" maxlength="100" placeholder="您的姓名 / 機構名稱" aria-label="姓名或機構名稱" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
+                    <input type="email" name="email" maxlength="200" placeholder="電子郵件地址" aria-label="電子郵件地址" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300" required>
+                    <textarea name="message" maxlength="3000" placeholder="請輸入您想合作的事項或諮詢內容..." aria-label="合作事項或諮詢內容" rows="4" class="w-full bg-white rounded-2xl px-6 py-4 font-semibold text-zinc-700 text-lg placeholder-zinc-400 border-2 border-emerald-100 focus:outline-none focus:border-emerald-300 resize-none" required></textarea>
+                    <!-- 防機器人：真人看不到這格，有填就是機器人 -->
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+                    <button type="submit" class="w-full clay-btn rounded-2xl px-8 py-4 font-bold text-emerald-950 text-lg cursor-pointer disabled:opacity-60 disabled:cursor-wait">
                         送出聯絡資訊
                     </button>
+                    <p id="contact-status" class="text-center font-semibold min-h-[1.5rem]" role="status"></p>
                 </form>
+                <script>
+                    // Apps Script 部署後拿到的網址貼這裡（程式碼在 apps-script/contact.gs）
+                    const CONTACT_URL = 'https://script.google.com/macros/s/AKfycbynEDiPir8e0XLUMV-TgUlqxmxw2ESkyNkCYY5bonzV8M77nbsqP5CxWUbuN11t3mX9CQ/exec';
+                    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const form = e.target, btn = form.querySelector('button'), status = document.getElementById('contact-status');
+                        btn.disabled = true;
+                        status.className = 'text-center font-semibold min-h-[1.5rem] text-zinc-500';
+                        status.textContent = '傳送中…';
+                        try {
+                            const res = await fetch(CONTACT_URL, { method: 'POST', body: new URLSearchParams(new FormData(form)) });
+                            const data = await res.json();
+                            if (!data.ok) throw new Error(data.error);
+                            form.reset();
+                            status.className = 'text-center font-semibold min-h-[1.5rem] text-emerald-700';
+                            status.textContent = '已收到您的訊息，我會盡快回覆！';
+                        } catch (err) {
+                            status.className = 'text-center font-semibold min-h-[1.5rem] text-red-600';
+                            status.textContent = '送出失敗，請稍後再試，或直接到 IG / Threads 私訊我。';
+                        } finally {
+                            btn.disabled = false;
+                        }
+                    });
+                </script>
             </div>
 
             <!-- Instagram & Threads Double QR Codes Card -->
