@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>共通職能 IDP</title>
+<style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#222;--muted:#666;--line:#ddd;--accent:#2f6f5e;--accent-soft:#e3f0ec;--err:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#18191a;--card:#232527;--ink:#eee;--muted:#aaa;--line:#3a3c3f;--accent:#6fc3a8;--accent-soft:#1f3a32;--err:#ff8a80}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1{font-size:1.4rem;margin:.5rem 0}
+h2{font-size:1.15rem;margin:0 0 .5rem}
+h3{font-size:1rem;margin:1rem 0 .3rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tabs button{flex:1;min-width:120px;padding:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;font-size:15px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+label{display:block;font-weight:600;margin:.7rem 0 .2rem}
+.req::after{content:" *";color:var(--err)}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:90px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 12px}
+.hint{color:var(--muted);font-size:.9rem;margin:.2rem 0}
+.def{color:var(--muted);font-size:.92rem;margin:.2rem 0 .6rem}
+.levels{display:grid;gap:6px}
+.levels label{display:flex;gap:8px;font-weight:400;margin:0;padding:8px;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.levels label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.levels input{width:auto;margin-top:4px}
+.lv{font-weight:600;white-space:nowrap}
+.indicator{background:var(--accent-soft);padding:8px 10px;border-radius:6px;min-height:2.5em;font-size:.95rem}
+.yn{display:flex;gap:16px;flex-wrap:wrap}
+.yn label{display:flex;gap:6px;font-weight:400;margin:.2rem 0}
+.yn input{width:auto}
+table{width:100%;border-collapse:collapse}
+td,th{border-bottom:1px solid var(--line);padding:8px 4px;text-align:left;vertical-align:top}
+th{font-size:.9rem;color:var(--muted)}
+.submit{width:100%;padding:14px;font-size:17px;background:var(--accent);color:#fff;border:0;border-radius:8px;cursor:pointer;margin-top:8px}
+.submit:disabled{opacity:.6}
+.msg{margin:10px 0;font-weight:600}
+.msg.err{color:var(--err)}
+.msg.ok{color:var(--accent)}
+[hidden]{display:none!important}
+details.guide{margin:.3rem 0 .4rem;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 6px 6px 0;padding:4px 10px;font-size:.93rem}
+details.guide summary{cursor:pointer;color:var(--accent);font-weight:600;padding:2px 0}
+details.guide ul{margin:.3rem 0;padding-left:1.2rem}
+details.guide .ex{background:var(--card);border:1px dashed var(--line);border-radius:6px;padding:6px 10px;margin:.4rem 0}
+.intro{background:var(--accent-soft);border-radius:10px;padding:12px 16px;margin:12px 0}
+.intro ol{margin:.3rem 0;padding-left:1.3rem}
+</style>
+</head>
+<body>
+<main>
+<h1>共通職能自評與個人發展計畫（IDP）</h1>
+<p class="hint">自評只用來找發展方向，不納入考績。請依實際做過的事選級別，拿不準就選低一級。</p>
+
+<div class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="plan">① 自評與 IDP（同仁）</button>
+  <button role="tab" aria-selected="false" data-tab="review">② 學習成效回饋（執行後）</button>
+  <button role="tab" aria-selected="false" data-tab="check">③ IDP 檢核表（主管）</button>
+</div>
+
+<!-- ① 自評與 IDP -->
+<form id="plan" data-sheet="自評與IDP">
+  <div class="intro">
+    <b>這份怎麼填（大約 20–30 分鐘）</b>
+    <ol>
+      <li>先替五項職能自評，看看自己現在在哪一級。</li>
+      <li>挑一項今年想練的職能，訂一個目標級別。</li>
+      <li>寫下打算怎麼練、需要什麼幫忙、什麼時候完成、用什麼證明自己做到了。</li>
+      <li>送出後找主管談一次，主管的工作是幫你找資源、陪你執行。</li>
+    </ol>
+    這份計畫由你自己寫，主管負責支援你，跟考績無關。每一欄下面都有「怎麼寫？」可以點開看提醒和範例。
+  </div>
+  <section class="card">
+    <h2>基本資料</h2>
+    <div class="grid">
+      <div><label class="req" for="p_name">姓名</label><input id="p_name" name="姓名" required></div>
+      <div><label class="req" for="p_id">員工編號</label><input id="p_id" name="員工編號" required></div>
+      <div><label class="req" for="p_unit">單位</label><input id="p_unit" name="單位" required></div>
+      <div><label class="req" for="p_type">職類</label>
+        <select id="p_type" name="職類" required><option value="">請選擇</option><option>醫技</option><option>護理</option><option>行政</option><option>其他</option></select></div>
+      <div><label class="req" for="p_boss">直屬主管</label><input id="p_boss" name="直屬主管" required></div>
+      <div><label class="req" for="p_date">填寫日期</label><input id="p_date" type="date" name="填寫日期" required></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>一、職能自評</h2>
+    <p class="hint">五項都要評。各級是疊上去的，做得到這一級，代表下面幾級也都做得到。</p>
+    <p class="hint">（行為指標為 2026/09/14 工作坊講義初稿）</p>
+    <details class="guide"><summary>怎麼選級別？</summary><ul>
+      <li>照「已經實際做過的事」來選。還沒做過、但想做到的級別，寫在下面的目標。</li>
+      <li>在兩級之間拿不準，就選低的那一級。</li>
+      <li>分數沒有好壞。新進同仁在 0、1 級很正常；年資跟級別也沒有一定對應，工作三年做到 3、4 級的人也有。</li>
+      <li>對照方式：看行為指標，問自己「我能舉出一件做過的事來證明嗎？」舉得出來才算。</li>
+    </ul></details>
+    <div id="selfEval"></div>
+  </section>
+
+  <section class="card">
+    <h2>二、個人發展計畫</h2>
+    <p class="hint">每年選一項就好，最多兩項。可以挑想加強的，也可以挑強項讓它更強。</p>
+
+    <h3>（一）目標設定</h3>
+    <details class="guide"><summary>怎麼選目標？</summary><ul>
+      <li>選哪一項都可以，常見理由有五種：讓強項更強、補一個已經影響工作的弱項、工作上剛好需要（例如單位要推數位化）、為升遷做準備、配合單位或醫院的年度目標。</li>
+      <li>目標級別通常比現在高一級。要是往上一級太吃力，也可以留在同一級、多加一點挑戰，例如學會新工具之後教同事。</li>
+      <li>挑的事最好本來就在你的工作範圍裡，不要另外替自己生一份額外工作。</li>
+      <li>一年真的練好一項就很不錯，第二項有需要再填。</li>
+    </ul>
+    <div class="ex"><b>範例</b>：今年被指派負責單位的數位改善案，自評數位創新是 3 級 → 目標選「數位創新 4 級」。</div>
+    </details>
+    <div id="goals"></div>
+
+    <h3>（二）預期效益</h3>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>對個人：練成之後，你會多會什麼？工作上會有什麼不一樣？</li>
+      <li>對組織：單位、同事或病人會因此得到什麼？</li>
+      <li>寫具體的事，避免「提升自我」「增進效率」這種放到哪份計畫都通的句子。</li>
+    </ul>
+    <div class="ex"><b>範例（數位創新 4 級）</b><br>個人：學會從找問題、評估工具到導入的完整流程，以後遇到類似專案能自己帶。<br>組織：單位的排程作業不用再手動重複登打，同仁每天省下的時間可以留給病人。</div>
+    </details>
+    <label class="req" for="p_benefit_me">對個人的效益</label><textarea id="p_benefit_me" name="效益_個人" required></textarea>
+    <label class="req" for="p_benefit_org">對組織的效益</label><textarea id="p_benefit_org" name="效益_組織" required></textarea>
+
+    <h3>（三）計畫內容</h3>
+    <label class="req" for="p_plan">計畫內容</label>
+    <p class="hint">在工作中打算怎麼練？主力放在本職工作裡有挑戰的任務（約七成），再搭配向有經驗的人學（約兩成）、上課（約一成）。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>寫具體要做的事。「多學習」「加強數位能力」太空泛，別人看不出你要做什麼。</li>
+      <li>對著目標的行為指標寫：指標裡寫到的動作（例如評估、選擇、驗證、導入），計畫裡都要練到。</li>
+      <li>能力主要是在做事的過程中長出來的，上課只是輔助，別整份都寫上課。</li>
+      <li>拆成幾個階段、每段大概何時完成，之後比較好追。</li>
+    </ul>
+    <div class="ex"><b>範例（數位創新 4 級）</b><br>
+      挑戰任務：① 3 月前整理單位排程作業的問題點；② 和資訊室一起評估兩種工具，6 月前選定；③ 試行一個月，收同事回饋再修改；④ 寫成作業說明，教單位同仁使用。<br>
+      向人學：每月和資訊室窗口討論一次進度。<br>
+      上課：參加院內的數位工具相關課程。</div>
+    </details>
+    <textarea id="p_plan" name="計畫內容" required></textarea>
+    <label for="p_res">需要的協助或資源</label>
+    <p class="hint">要申請訓練的話，請寫課程名稱與費用。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>需要主管或醫院幫什麼：時間、人力、經費、課程、讓你加入某個專案、介紹可以請教的人。</li>
+      <li>也寫你自己準備的部分，例如自己找的書或線上課程。</li>
+      <li>要花錢的東西（例如買工具），順便寫有沒有替代方案。</li>
+    </ul>
+    <div class="ex"><b>範例</b>：請主管每月保留 2 小時讓我和資訊室討論；試行期間需要單位同仁配合試用並給回饋。</div>
+    </details>
+    <textarea id="p_res" name="需要的協助或資源"></textarea>
+    <label class="req" for="p_due">預計完成時間</label>
+    <p class="hint">多半設半年到一年。</p>
+    <input id="p_due" type="date" name="預計完成時間" required>
+    <label class="req" for="p_eval">學習成果評估：評估方式</label>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>寫清楚：用什麼標準判斷做到了、誰來看、什麼時候看。</li>
+      <li>能用數字就用數字，寫明幾月前達到多少。</li>
+      <li>也可以是主管或同儕觀察、專家評鑑、使用者回饋。</li>
+    </ul>
+    <div class="ex"><b>範例（教學 4 級）</b>：6 月底前完成 3 個教學單元，學員滿意度 4.5 分以上（滿分 5），前後測進步 20% 以上。<br><b>範例（數位創新 4 級）</b>：9 月前新流程正式上線，比較導入前後每週花在排程的時間。</div>
+    </details>
+    <textarea id="p_eval" name="評估方式" required></textarea>
+    <label class="req" for="p_evid">學習成果評估：要蒐集的能力證據</label>
+    <p class="hint">用什麼東西證明自己做到了，例如做出來的成果、教材、改善報告。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>做出來的東西本身就是證據：教材、教案、SOP、改善報告、系統上線紀錄、會議紀錄、課程簽到表或滿意度結果。</li>
+      <li>證據要能讓別人看出你做到了目標那一級的行為指標。</li>
+      <li>邊做邊留，別等到最後才回頭找。</li>
+    </ul>
+    <div class="ex"><b>範例（數位創新 4 級）</b>：工具評估比較表、試行回饋紀錄、新流程作業說明、上線前後的時間統計。</div>
+    </details>
+    <textarea id="p_evid" name="能力證據" required></textarea>
+  </section>
+  <button class="submit" type="submit">送出</button>
+  <p class="msg" role="status"></p>
+</form>
+
+<!-- ② 學習成效回饋 -->
+<form id="review" data-sheet="學習成效回饋" hidden>
+  <section class="card">
+    <h2>基本資料</h2>
+    <div class="grid">
+      <div><label class="req" for="r_name">姓名</label><input id="r_name" name="姓名" required></div>
+      <div><label class="req" for="r_id">員工編號</label><input id="r_id" name="員工編號" required></div>
+      <div><label class="req" for="r_date">填寫日期</label><input id="r_date" type="date" name="填寫日期" required></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>四、學習成效回饋</h2>
+    <h3>同仁填寫</h3>
+    <label class="req" for="r_reflect">學習省思</label>
+    <p class="hint">這段時間的學習發現、省思與能力成長。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>可以回答這幾題：做了哪些事？哪裡卡住、後來怎麼處理？現在跟當初比，多會了什麼？</li>
+      <li>寫真實的過程就好，沒做完也照實寫，這是拿來調整下一份計畫的。</li>
+    </ul></details>
+    <textarea id="r_reflect" name="學習省思" required></textarea>
+    <label class="req">自評是否達成目標</label>
+    <div class="yn"><label><input type="radio" name="自評是否達成" value="是" required>是</label><label><input type="radio" name="自評是否達成" value="否">否</label></div>
+    <label class="req" for="r_self">說明</label>
+    <p class="hint">選「是」請附佐證；選「否」請說明原因與調整方式。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>選「是」：列出你的能力證據，寫清楚放在哪裡、怎麼對應到行為指標。</li>
+      <li>選「否」：寫卡在哪裡，下一步打算怎麼調，例如延長時間、拆小一點、換個做法、需要什麼新資源。</li>
+    </ul></details>
+    <textarea id="r_self" name="自評說明" required></textarea>
+
+    <h3>主管填寫</h3>
+    <div class="grid"><div><label class="req" for="r_boss">主管姓名</label><input id="r_boss" name="主管姓名" required></div></div>
+    <label class="req">主管是否觀察到目標達成</label>
+    <div class="yn"><label><input type="radio" name="主管是否觀察到達成" value="是" required>是</label><label><input type="radio" name="主管是否觀察到達成" value="否">否</label></div>
+    <label class="req" for="r_fb">主管回饋</label>
+    <p class="hint">選「是」請寫觀察到的行為指標或工作成果；選「否」請給回饋與建議。</p>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>寫你親眼看到的具體行為或成果，對回目標的行為指標，例如「主導了新排程工具的評估，帶單位同仁試行並整理回饋」。</li>
+      <li>沒達成的話，給一兩個具體建議，也寫你接下來能提供什麼支援。</li>
+      <li>請從發展的角度寫，跟考績面談分開看。</li>
+    </ul></details>
+    <textarea id="r_fb" name="主管回饋" required></textarea>
+  </section>
+  <button class="submit" type="submit">送出</button>
+  <p class="msg" role="status"></p>
+</form>
+
+<!-- ③ 主管檢核表 -->
+<form id="check" data-sheet="IDP檢核表" hidden>
+  <section class="card">
+    <h2>基本資料</h2>
+    <div class="grid">
+      <div><label class="req" for="c_boss">主管姓名</label><input id="c_boss" name="主管姓名" required></div>
+      <div><label class="req" for="c_name">同仁姓名</label><input id="c_name" name="同仁姓名" required></div>
+      <div><label class="req" for="c_id">同仁員工編號</label><input id="c_id" name="同仁員工編號" required></div>
+      <div><label class="req" for="c_date">檢核日期</label><input id="c_date" type="date" name="檢核日期" required></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>個人發展計畫檢核表</h2>
+    <p class="hint">看內容有沒有真的支持行為指標的鍛鍊，七格都勾「是」不代表計畫就好。</p>
+    <details class="guide"><summary>主管怎麼看、怎麼談？</summary><ul>
+      <li>檢視順序：先看方向對不對（關聯性、一致性），再看練不練得到（可行性、充足性），最後看資源、時程和證據。</li>
+      <li>同仁選的方向和你想的不一樣（例如他想讓強項更強，你希望補弱項），原則上尊重他的選擇，再引導兼顧。</li>
+      <li>同仁只挑很保守的目標：先問他擔心什麼，再建議往上一級，或同一級多加一點挑戰。不要拿考績逼。</li>
+      <li>目標太難或時程太趕，不要直接否決，幫他拆成幾個階段。</li>
+      <li>面談把重點放在他的成長和你能給的協助，同時講清楚 IDP 跟考績無關，挑的任務也都在本職工作裡。</li>
+    </ul></details>
+    <table><thead><tr><th>檢核維度</th><th>檢核項目</th><th>結果</th></tr></thead><tbody id="checkRows"></tbody></table>
+    <h3>回饋與建議</h3>
+    <details class="guide"><summary>怎麼寫？</summary><ul>
+      <li>可學習之處：具體點出計畫裡寫得好的地方，例如「證據清單對得上 4 級的行為指標」。</li>
+      <li>可更好之處：只挑一個最值得改的，附上改法，例如「計畫內容多半是上課，建議加一個本職的挑戰任務」。</li>
+    </ul></details>
+    <label class="req" for="c_learn1">可學習之處 1</label><textarea id="c_learn1" name="可學習之處1" required></textarea>
+    <label class="req" for="c_learn2">可學習之處 2</label><textarea id="c_learn2" name="可學習之處2" required></textarea>
+    <label class="req" for="c_better">可更好之處</label><textarea id="c_better" name="可更好之處" required></textarea>
+  </section>
+  <button class="submit" type="submit">送出</button>
+  <p class="msg" role="status"></p>
+</form>
+</main>
+
+<script>
+// 部署 Apps Script 後，把網頁應用程式網址貼在這裡
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwR3rvHigQUNfhJA9FrSwrk-34MS7dHRww-7X9B9VK3VCcOC1aF_KkOwpuilGLjdQXaRw/exec';
+
+const LEVEL_NAMES = ['尚未展現','認知遵循','獨立實踐','指導傳承','整合建構','引領創新'];
+// 行為指標：2026-09-14 工作坊講義初稿，定稿出來再換
+const COMP = [
+  {name:'專業能力', def:'具備執行職務工作所需的專業知識與技能，能依相關法規、專業規範、作業標準及組織要求完成工作，並持續提升工作品質與專業價值。', lv:[
+    '尚未展現該行為',
+    '能在他人的監督與指導下，依規範及標準流程，正確完成所負責的工作。',
+    '能運用專業知識與技能，獨立完成常規性工作，並處理一般性問題。',
+    '能運用專業知識與技能處理非常規性工作或較複雜問題，並指導他人掌握工作方法與工作要求。',
+    '能整合專業經驗與相關資源，改善流程、建立標準或形成可持續運作的方法。',
+    '能掌握專業發展趨勢，提出創新方向與作法，並帶動團隊或組織專業持續發展。']},
+  {name:'教學', def:'能參與教學規劃及人才培育，運用適當的教學或指導方法，傳授知識與經驗，協助他人學習成長。', lv:[
+    '尚未展現該行為',
+    '能參與研習、教育訓練及相關學習活動，或協助教學工作進行。',
+    '能於日常工作中指導同仁，依據工作需求，提供說明、示範與回饋，協助他人掌握工作內容。',
+    '能於教育訓練、研習活動或品管圈擔任講師、輔導員或圈長，依據學習者或團隊需求進行教學、引導與經驗傳承。',
+    '能主導教育訓練規劃或教學品質改善等活動，建立有效的教學方法或學習機制。',
+    '能掌握專業發展趨勢，推動教學創新與人才培育，建立具示範性的教學模式，並引領組織或專業領域的教學發展。']},
+  {name:'研究', def:'能運用資料分析、實證研究及問題解決方法，針對專業或工作現場議題進行探討、改善與成果整理，並透過學術發表、專門著作或業務改善報告，將成果轉化為可應用、可分享的專業知識與改善作法。', lv:[
+    '尚未展現該行為',
+    '參與研究、實證或持續改善活動，負責指定的工作，如：資料蒐集、紀錄、執行或成果整理等。',
+    '針對工作或專業問題，獨立蒐集與整理相關資料，運用適當方法完成小型研究或改善活動。',
+    '規劃並執行自身專業的研究或持續改善活動，發現問題根因，提出解決方案並指導同仁共同完成成果。',
+    '整合跨專業的研究或持續改善活動，建立跨專業合作機制與研究作法，可持續運作或擴散至其他單位運用。',
+    '針對組織議題，引領跨單位研究與改善，產出具院內外影響力的成果，並帶動成果應用與擴散。']},
+  {name:'數位創新', def:'能運用數位資料、工具、系統或新興科技，提升工作效率、品質與服務效能；並能從工作現場辨識改善機會，參與數位創新、優化工作流程。', lv:[
+    '尚未展現該行為',
+    '能依工作需求正確使用既有數位工具、資訊系統與設備完成工作。',
+    '能參與數位創新活動，提出工作痛點，協助資料蒐集、分類與整理，並參與創意發想及使用測試。',
+    '能分析工作流程與問題，運用數位科技優化工作，並指導同仁使用數位工具或流程。',
+    '能整合工作需求與流程，參與數位技術或系統方案的評估、選擇、驗證與導入，並協助建立可持續運作的數位作業模式。',
+    '能從組織與服務需求出發，引領組織數位轉型，發展新的服務、營運模式或價值創造方式。']},
+  {name:'領導管理', def:'能從自我管理、分工協調與專案督導，逐步建立有效的團隊運作方法，並凝聚團隊共識與向心力，帶領成員共同達成目標。', lv:[
+    '尚未展現該行為',
+    '能掌握自身工作職責、進度與優先順序，依要求完成任務，並對工作結果負責。',
+    '能依據共同任務，與他人分工合作，掌握彼此工作進度，確保任務順利銜接與完成。',
+    '能依專案目標督導工作執行，掌握進度、品質與成果，適時協調資源提供指導並促進專案完成。',
+    '能依團隊目標建立分工、溝通、協作、追蹤與問題處理等團隊運作方法，使團隊能穩定且有效地完成工作。',
+    '能建立共同願景與目標，凝聚團隊共識與向心力，激發成員投入與合作，帶領團隊達成目標。']},
+];
+const CHECKS = [
+  ['關聯性','所選職能的行為指標與工作相關聯'],
+  ['一致性','所選職能的行為指標與工作目標一致'],
+  ['可行性','針對所選行為指標規劃計畫內容'],
+  ['充足性','計畫內容能夠充分鍛鍊所選行為指標'],
+  ['實現性','提出發展所需資源和協助'],
+  ['追蹤性','設定預計完成日期，能夠追蹤'],
+  ['有效性','學習成果評估方式與能力證據，能夠判斷職能'],
+];
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// 自評
+document.getElementById('selfEval').innerHTML = COMP.map((c,i) => `
+  <fieldset style="border:0;padding:0;margin:0 0 14px">
+    <legend><h3 style="margin:0">${i+1}. ${c.name}</h3></legend>
+    <p class="def">${c.def}</p>
+    <div class="levels">${c.lv.map((t,l) => `
+      <label><input type="radio" name="自評_${c.name}" value="${l}" ${l===0?'required':''}>
+      <span><span class="lv">${l} ${LEVEL_NAMES[l]}</span>　${t}</span></label>`).join('')}
+    </div>
+  </fieldset>`).join('');
+
+// 目標設定（第 1 項必填，第 2 項選填）
+document.getElementById('goals').innerHTML = [1,2].map(n => `
+  <div class="goal" data-n="${n}">
+    <p class="hint" style="font-weight:600">目標 ${n}${n===2?'（選填）':''}</p>
+    <div class="grid">
+      <div><label class="${n===1?'req':''}" for="g${n}c">職能項目</label>
+        <select id="g${n}c" name="目標${n}_職能" ${n===1?'required':''}><option value="">請選擇</option>${COMP.map(c=>`<option>${c.name}</option>`).join('')}</select></div>
+      <div><label class="${n===1?'req':''}" for="g${n}l">目標級別</label>
+        <select id="g${n}l" name="目標${n}_級別" ${n===1?'required':''}><option value="">請選擇</option>${[1,2,3,4,5].map(l=>`<option value="${l}">${l} ${LEVEL_NAMES[l]}</option>`).join('')}</select></div>
+    </div>
+    <label>行為指標</label>
+    <div class="indicator" id="g${n}i">選好職能和級別後會自動帶出</div>
+    <input type="hidden" id="g${n}h" name="目標${n}_行為指標">
+  </div>`).join('');
+[1,2].forEach(n => {
+  const c = document.getElementById(`g${n}c`), l = document.getElementById(`g${n}l`), out = document.getElementById(`g${n}i`);
+  const upd = () => {
+    const comp = COMP.find(x => x.name === c.value);
+    const t = comp && l.value ? comp.lv[l.value] : '';
+    out.textContent = t || '選好職能和級別後會自動帶出';
+    document.getElementById(`g${n}h`).value = t;
+  };
+  c.onchange = l.onchange = upd;
+});
+
+// 檢核表
+document.getElementById('checkRows').innerHTML = CHECKS.map(([d,t],i) => `
+  <tr><td><b>${d}</b></td><td>${i+1}. ${t}</td>
+  <td class="yn" style="display:table-cell"><label><input type="radio" name="檢核_${d}" value="是" required>是</label><label><input type="radio" name="檢核_${d}" value="否">否</label></td></tr>`).join('');
+
+// 分頁
+const tabs = document.querySelectorAll('[data-tab]');
+tabs.forEach(b => b.onclick = () => {
+  tabs.forEach(x => x.setAttribute('aria-selected', x === b));
+  document.querySelectorAll('form').forEach(f => f.hidden = f.id !== b.dataset.tab);
+  window.scrollTo(0,0);
+});
+
+// 草稿：存在這台裝置，送出後清掉
+const KEY = id => 'idp-draft-' + id;
+document.querySelectorAll('form').forEach(f => {
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY(f.id)) || '{}');
+    for (const [k,v] of Object.entries(d)) {
+      f.querySelectorAll(`[name="${CSS.escape(k)}"]`).forEach(el => {
+        if (el.type === 'radio') el.checked = el.value === v; else el.value = v;
+      });
+    }
+    f.querySelectorAll('select').forEach(s => s.dispatchEvent(new Event('change')));
+  } catch {}
+  f.addEventListener('input', () => { try { localStorage.setItem(KEY(f.id), JSON.stringify(Object.fromEntries(new FormData(f)))); } catch {} });
+  f.addEventListener('change', () => { try { localStorage.setItem(KEY(f.id), JSON.stringify(Object.fromEntries(new FormData(f)))); } catch {} });
+
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    const msg = f.querySelector('.msg'), btn = f.querySelector('.submit');
+    msg.className = 'msg'; msg.textContent = '';
+    // 目標 2 只填一半
+    if (f.id === 'plan') {
+      const c2 = f.querySelector('#g2c').value, l2 = f.querySelector('#g2l').value;
+      if (!!c2 !== !!l2) { msg.className = 'msg err'; msg.textContent = '目標 2 的職能項目和級別要一起填，或兩個都空著。'; return; }
+    }
+    if (!ENDPOINT) { msg.className = 'msg err'; msg.textContent = '表單還沒接上試算表，請通知承辦人。'; return; }
+    const data = { _sheet: f.dataset.sheet, ...Object.fromEntries(new FormData(f)) };    btn.disabled = true; btn.textContent = '送出中⋯';
+    try {
+      // text/plain 避開 CORS 預檢；no-cors 讀不到回應，送出沒丟錯就當成功
+      await fetch(ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data) });
+      msg.className = 'msg ok'; msg.textContent = '送出了，謝謝！';
+      try { localStorage.removeItem(KEY(f.id)); } catch {}
+      f.reset(); f.querySelectorAll('select').forEach(s => s.dispatchEvent(new Event('change')));
+    } catch (err) {
+      msg.className = 'msg err'; msg.textContent = '送不出去，請檢查網路後再試一次（填的內容還在）。';
+    } finally { btn.disabled = false; btn.textContent = '送出'; }
+  });
+});
+</script>
+</body>
+</html>
