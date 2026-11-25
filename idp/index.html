@@ -52,14 +52,8 @@ details.guide .ex{background:var(--card);border:1px dashed var(--line);border-ra
 </head>
 <body>
 <main>
-<h1>共通職能自評與個人發展計畫（IDP）</h1>
-<p class="hint">自評只用來找發展方向，不納入考績。請依實際做過的事選級別，拿不準就選低一級。</p>
-
-<div class="tabs" role="tablist">
-  <button role="tab" aria-selected="true" data-tab="plan">① 自評與 IDP（同仁）</button>
-  <button role="tab" aria-selected="false" data-tab="review">② 學習成效回饋（執行後）</button>
-  <button role="tab" aria-selected="false" data-tab="check">③ IDP 檢核表（主管）</button>
-</div>
+<h1 id="title">共通職能自評與個人發展計畫（IDP）</h1>
+<p class="hint" id="subtitle">自評只用來找發展方向，不納入考績。請依實際做過的事選級別，拿不準就選低一級。</p>
 
 <!-- ① 自評與 IDP -->
 <form id="plan" data-sheet="自評與IDP">
@@ -348,13 +342,16 @@ document.getElementById('checkRows').innerHTML = CHECKS.map(([d,t],i) => `
   <tr><td><b>${d}</b></td><td>${i+1}. ${t}</td>
   <td class="yn" style="display:table-cell"><label><input type="radio" name="檢核_${d}" value="是" required>是</label><label><input type="radio" name="檢核_${d}" value="否">否</label></td></tr>`).join('');
 
-// 分頁
-const tabs = document.querySelectorAll('[data-tab]');
-tabs.forEach(b => b.onclick = () => {
-  tabs.forEach(x => x.setAttribute('aria-selected', x === b));
-  document.querySelectorAll('form').forEach(f => f.hidden = f.id !== b.dataset.tab);
-  window.scrollTo(0,0);
-});
+// 一個網址一份表單：/idp/ 自評與 IDP；?f=review 學習成效回饋；?f=check 主管檢核表
+const PAGES = {
+  plan:   ['共通職能自評與個人發展計畫（IDP）', '自評只用來找發展方向，不納入考績。請依實際做過的事選級別，拿不準就選低一級。'],
+  review: ['IDP 學習成效回饋', '計畫執行一段時間後填寫。先由你寫學習省思，再請主管填回饋。'],
+  check:  ['IDP 檢核表（主管填寫）', '同仁交出自評與 IDP 之後，主管用這份檢視計畫內容。'],
+};
+const page = PAGES[new URLSearchParams(location.search).get('f')] ? new URLSearchParams(location.search).get('f') : 'plan';
+document.querySelectorAll('form').forEach(f => f.hidden = f.id !== page);
+document.getElementById('title').textContent = document.title = PAGES[page][0];
+document.getElementById('subtitle').textContent = PAGES[page][1];
 
 // 草稿：存在這台裝置，送出後清掉
 const KEY = id => 'idp-draft-' + id;
