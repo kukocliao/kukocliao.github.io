@@ -1,7 +1,7 @@
 // 獨立的 Apps Script 專案，部署成網頁應用程式。收件試算表：「共通職能 IDP 收件」
 const SS_ID = '1sPLSUs5Us4_uiR3uAidiYk5pkdXNmjifhE-EDUftY7I';
-// 每種表單寫進自己的工作表（自評與IDP／學習成效回饋／IDP檢核表），第一次送出時自動建表頭。
-const SHEETS = ['自評與IDP', '學習成效回饋', 'IDP檢核表'];
+// 每種表單寫進自己的工作表（自評與IDP／IDP檢核表／學習成效回饋／主管回饋），第一次送出時自動建表頭。
+const SHEETS = ['自評與IDP', 'IDP檢核表', '學習成效回饋', '主管回饋'];
 
 function doPost(e) {
   const lock = LockService.getScriptLock();

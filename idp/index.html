@@ -177,7 +177,6 @@ details.guide .ex{background:var(--card);border:1px dashed var(--line);border-ra
   </section>
   <section class="card">
     <h2>四、學習成效回饋</h2>
-    <h3>同仁填寫</h3>
     <label class="req" for="r_reflect">學習省思</label>
     <p class="hint">這段時間的學習發現、省思與能力成長。</p>
     <details class="guide"><summary>怎麼寫？</summary><ul>
@@ -194,19 +193,33 @@ details.guide .ex{background:var(--card);border:1px dashed var(--line);border-ra
       <li>選「否」：寫卡在哪裡，下一步打算怎麼調，例如延長時間、拆小一點、換個做法、需要什麼新資源。</li>
     </ul></details>
     <textarea id="r_self" name="自評說明" required></textarea>
+  </section>
+  <button class="submit" type="submit">送出</button>
+  <p class="msg" role="status"></p>
+</form>
 
-    <h3>主管填寫</h3>
-    <div class="grid"><div><label class="req" for="r_boss">主管姓名</label><input id="r_boss" name="主管姓名" required></div></div>
-    <label class="req">主管是否觀察到目標達成</label>
+<!-- ③ 主管回饋 -->
+<form id="feedback" data-sheet="主管回饋" hidden>
+  <section class="card">
+    <h2>基本資料</h2>
+    <div class="grid">
+      <div><label class="req" for="f_boss">主管姓名</label><input id="f_boss" name="主管姓名" required></div>
+      <div><label class="req" for="f_name">同仁姓名</label><input id="f_name" name="同仁姓名" required></div>
+      <div><label class="req" for="f_date">填寫日期</label><input id="f_date" type="date" name="填寫日期" required></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>主管回饋</h2>
+    <label class="req">是否觀察到同仁達成目標</label>
     <div class="yn"><label><input type="radio" name="主管是否觀察到達成" value="是" required>是</label><label><input type="radio" name="主管是否觀察到達成" value="否">否</label></div>
-    <label class="req" for="r_fb">主管回饋</label>
+    <label class="req" for="f_fb">主管回饋</label>
     <p class="hint">選「是」請寫觀察到的行為指標或工作成果；選「否」請給回饋與建議。</p>
     <details class="guide"><summary>怎麼寫？</summary><ul>
       <li>寫你親眼看到的具體行為或成果，對回目標的行為指標，例如「主導了新排程工具的評估，帶單位同仁試行並整理回饋」。</li>
       <li>沒達成的話，給一兩個具體建議，也寫你接下來能提供什麼支援。</li>
       <li>請從發展的角度寫，跟考績面談分開看。</li>
     </ul></details>
-    <textarea id="r_fb" name="主管回饋" required></textarea>
+    <textarea id="f_fb" name="主管回饋" required></textarea>
   </section>
   <button class="submit" type="submit">送出</button>
   <p class="msg" role="status"></p>
@@ -342,10 +355,11 @@ document.getElementById('checkRows').innerHTML = CHECKS.map(([d,t],i) => `
   <tr><td><b>${d}</b></td><td>${i+1}. ${t}</td>
   <td class="yn" style="display:table-cell"><label><input type="radio" name="檢核_${d}" value="是" required>是</label><label><input type="radio" name="檢核_${d}" value="否">否</label></td></tr>`).join('');
 
-// 一個網址一份表單：/idp/ 自評與 IDP；?f=review 學習成效回饋；?f=check 主管檢核表
+// 一個網址一份表單：/idp/ 自評與 IDP；?f=check 主管檢核表；?f=review 學習成效回饋；?f=feedback 主管回饋
 const PAGES = {
   plan:   ['共通職能自評與個人發展計畫（IDP）', '自評只用來找發展方向，不納入考績。請依實際做過的事選級別，拿不準就選低一級。'],
-  review: ['IDP 學習成效回饋', '計畫執行一段時間後填寫。先由你寫學習省思，再請主管填回饋。'],
+  review: ['IDP 學習成效回饋', '計畫執行一段時間後填寫，回顧這段時間的學習。'],
+  feedback: ['IDP 主管回饋', '同仁交出學習成效回饋之後，主管針對同仁的目標達成情況填寫。'],
   check:  ['IDP 檢核表（主管填寫）', '同仁交出自評與 IDP 之後，主管用這份檢視計畫內容。'],
 };
 const page = PAGES[new URLSearchParams(location.search).get('f')] ? new URLSearchParams(location.search).get('f') : 'plan';
